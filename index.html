@@ -20,6 +20,7 @@
             --success: #10b981; --success-dark: #059669;
             --warning: #f59e0b; --warning-dark: #d97706;
             --danger: #ef4444; --danger-dark: #b91c1c;
+            --violet: #8b5cf6;
             --bg: #f0f4f8; --bg-card: #fff;
             --text-primary: #1a202c; --text-secondary: #64748b; --text-muted: #94a3b8;
             --border: #e2e8f0; --border-light: #f1f5f9;
@@ -33,21 +34,27 @@
         .container { max-width: 560px; margin: auto; padding: 0 16px; }
 
         .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light)); padding: 24px 0 20px; margin-bottom: 24px; border-radius: 0 0 24px 24px; }
-        .header-inner { max-width: 560px; margin: auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .header-inner { max-width: 560px; margin: auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
         .header h1 { font-size: 1.45rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
         .header .sub { font-size: 0.74rem; color: rgba(255,255,255,0.7); margin-top: 3px; }
-        .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
-        .install-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 50px; border: none; background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 12px rgba(59,130,246,0.35); white-space: nowrap; }
-        .install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(59,130,246,0.45); }
-
-        .lock-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.12); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: all 0.25s; backdrop-filter: blur(6px); white-space: nowrap; }
-        .lock-btn:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
-        .lock-btn.unlocked { background: rgba(16,185,129,0.28); border-color: rgba(16,185,129,0.55); }
+        .header-actions { display: flex; gap: 9px; align-items: center; flex-shrink: 0; }
+        .hbtn { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.14); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; backdrop-filter: blur(6px); position: relative; }
+        .hbtn:hover { background: rgba(255,255,255,0.28); transform: translateY(-1px); }
+        .hbtn:active { transform: scale(0.94); }
+        .hbtn svg { width: 20px; height: 20px; }
+        .hbtn.install { background: rgba(59,130,246,0.4); border-color: rgba(96,165,250,0.55); }
+        .hbtn.install:hover { background: rgba(59,130,246,0.6); }
+        .hbtn.add { background: rgba(16,185,129,0.45); border-color: rgba(52,211,153,0.6); }
+        .hbtn.add:hover { background: rgba(16,185,129,0.65); }
+        .hbtn.lock.unlocked { background: rgba(245,158,11,0.42); border-color: rgba(251,191,36,0.6); }
+        .hbtn::after { content: attr(data-tip); position: absolute; top: calc(100% + 9px); right: 0; background: var(--primary-dark); color: #fff; font-size: 0.64rem; font-weight: 600; padding: 5px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 50; }
+        .hbtn:hover::after { opacity: 1; }
 
         .card { background: var(--bg-card); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-lg); margin-bottom: 20px; border: 1px solid var(--border-light); animation: slideUp 0.4s ease forwards; opacity: 0; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-        .card-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.98rem; color: var(--primary); margin-bottom: 18px; padding-bottom: 13px; border-bottom: 2px solid var(--border-light); }        .card-title .title-icon { width: 34px; height: 34px; background: var(--accent-glow); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
+        .card-title { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.98rem; color: var(--primary); margin-bottom: 18px; padding-bottom: 13px; border-bottom: 2px solid var(--border-light); }
+        .card-title .title-icon { width: 34px; height: 34px; background: var(--accent-glow); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
 
         label { display: block; font-weight: 600; font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
         select, input { width: 100%; padding: 13px 15px; border: 2px solid var(--border); border-radius: var(--radius-md); font-size: 15px; font-family: 'Inter', sans-serif; background: #f8fafc; margin-bottom: 15px; transition: all 0.25s; color: var(--text-primary); }
@@ -64,43 +71,62 @@
         .btn-sm { padding: 9px 16px; font-size: 0.8rem; }
         .btn-success { background: linear-gradient(135deg, var(--success), var(--success-dark)); }
 
+        .tab-bar { display: flex; gap: 6px; margin-bottom: 18px; background: var(--border-light); padding: 5px; border-radius: 50px; }
+        .tab-bar button { flex: 1; border-radius: 50px; border: none; padding: 10px 14px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.25s; font-family: 'Inter', sans-serif; background: transparent; color: var(--text-secondary); }
+        .tab-bar button.active-tab { background: #fff; color: var(--primary); box-shadow: var(--shadow-sm); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        .range-row { display: flex; gap: 10px; }
+        .range-row input { flex: 1; }
+
+        .notch-toggle-row { display: flex; align-items: center; gap: 9px; background: #f8fafc; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; }
+        .notch-toggle-row:hover { border-color: var(--warning); }
+        .notch-toggle-row input { width: 17px; height: 17px; margin: 0; accent-color: var(--warning); flex-shrink: 0; }
+        .notch-toggle-row span { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); }
+
         .type-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 50px; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; }
         .type-badge.rolls { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; border: 1px solid #fcd34d; }
         .type-badge.rings { background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #5b21b6; border: 1px solid #c4b5fd; }
 
-        .cap-chip { display: none; align-items: center; gap: 6px; padding: 8px 14px; border-radius: var(--radius-md); font-size: 0.76rem; font-weight: 600; margin-bottom: 15px; }
-        .cap-chip.show { display: inline-flex; animation: fadeIn 0.3s ease; }
-        .cap-chip.yes { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; border: 1px solid #fcd34d; }
-        .cap-chip.no { background: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border); }
+        .stand-select-row { display: flex; gap: 8px; align-items: stretch; margin-bottom: 15px; }
+        .stand-select-row select { flex: 1; margin: 0; }
+        .del-stand-btn { width: 48px; flex-shrink: 0; border: 1.5px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); color: var(--danger); border-radius: var(--radius-md); cursor: pointer; font-size: 1.05rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .del-stand-btn:hover { background: rgba(239,68,68,0.18); transform: translateY(-1px); }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-        .op-btns { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 8px; }
-        .op-btn { padding: 16px 12px; border: 2px solid var(--border); border-radius: var(--radius-md); background: #f8fafc; cursor: pointer; text-align: center; font-family: 'Inter', sans-serif; transition: all 0.25s; animation: fadeIn 0.35s ease both; }
-        .op-btn:hover { transform: translateY(-3px); border-color: var(--accent-light); box-shadow: var(--shadow-md); }
-        .op-btn.active { border-color: var(--accent); background: var(--accent-glow); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .op-btn .op-icon { font-size: 1.6rem; display: block; margin-bottom: 7px; }
-        .op-btn .op-name { font-weight: 700; font-size: 0.82rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .op-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+        .op-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border: 1.5px solid var(--border); border-radius: 50px; background: #fff; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.8rem; color: var(--text-secondary); transition: all 0.22s ease; animation: fadeIn 0.35s ease both; }
+        .op-btn .op-icon { font-size: 1rem; line-height: 1; transition: transform 0.22s ease; }
+        .op-btn:hover { border-color: var(--accent-light); color: var(--primary); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+        .op-btn:hover .op-icon { transform: scale(1.15); }
+        .op-btn.active.op-turning { border-color: #3b82f6; background: rgba(59,130,246,0.1); color: #1d4ed8; box-shadow: 0 0 0 3px rgba(59,130,246,0.13); }
+        .op-btn.active.op-grinding { border-color: #8b5cf6; background: rgba(139,92,246,0.1); color: #6d28d9; box-shadow: 0 0 0 3px rgba(139,92,246,0.13); }
+        .op-btn.active.op-notching { border-color: #f59e0b; background: rgba(245,158,11,0.13); color: #b45309; box-shadow: 0 0 0 3px rgba(245,158,11,0.16); }
 
-        .fields-head-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .fields-head-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
         .shared-count { display: inline-flex; align-items: center; gap: 6px; font-size: 0.76rem; font-weight: 600; color: var(--text-secondary); }
         .shared-count .count-num { font-family: 'IBM Plex Mono', monospace; color: var(--accent); font-weight: 700; font-size: 0.9rem; }
         .mode-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
         .mode-chip.view { background: #f1f5f9; color: var(--text-secondary); border: 1px solid var(--border); }
         .mode-chip.edit { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #065f46; border: 1px solid #6ee7b7; }
 
-        .fields-table { width: 100%; border-collapse: separate; border-spacing: 0 6px; margin-bottom: 15px; }
-        .fields-table tr { background: #f8fafc; border-radius: var(--radius-sm); animation: fadeIn 0.3s ease; }
-        .fields-table td { padding: 11px 12px; font-size: 0.86rem; vertical-align: middle; }
-        .fields-table td.f-key { font-weight: 700; color: var(--primary); width: 40%; background: var(--accent-glow); border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
-        .fields-table td.f-val { font-weight: 600; font-family: 'IBM Plex Mono', monospace; color: var(--text-primary); }
-        .row-act-cell { width: 78px; text-align: right; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; white-space: nowrap; }
-        .row-act { background: none; border: none; cursor: pointer; font-size: 0.92rem; padding: 5px 6px; border-radius: 7px; transition: all 0.2s; margin-left: 2px; vertical-align: middle; }
-        .row-act.edit:hover { background: var(--accent-glow); transform: scale(1.1); }
-        .row-act.del:hover { background: rgba(239,68,68,0.12); transform: scale(1.1); }        .row-act.save { color: var(--success); font-weight: 800; font-size: 1rem; }
+        .fields-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin-bottom: 16px; }
+        .fields-table tr { background: #fff; box-shadow: 0 1px 4px rgba(15,36,64,0.06); border-radius: var(--radius-sm); transition: transform 0.18s ease, box-shadow 0.18s ease; animation: fadeIn 0.3s ease both; }
+        .fields-table tr:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(15,36,64,0.11); }
+        .fields-table td { padding: 13px 14px; vertical-align: middle; font-size: 0.87rem; }
+        .fields-table td.f-key { font-weight: 700; color: var(--primary); width: 38%; background: #f4f8ff; border-left: 3px solid var(--accent); border-radius: 10px 0 0 10px; font-size: 0.84rem; letter-spacing: 0.2px; }
+        .fields-table td.f-val { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--text-primary); font-size: 0.88rem; }
+        .fields-table td.row-act-cell { width: 76px; text-align: right; white-space: nowrap; border-radius: 0 10px 10px 0; }
+        .row-act { background: none; border: none; cursor: pointer; font-size: 0.95rem; padding: 6px 7px; border-radius: 8px; transition: all 0.2s; margin-left: 2px; vertical-align: middle; }
+        .row-act.edit:hover { background: var(--accent-glow); transform: scale(1.12); }
+        .row-act.del:hover { background: rgba(239,68,68,0.12); transform: scale(1.12); }
+        .row-act.save { color: var(--success); font-weight: 800; font-size: 1.05rem; }
         .row-act.save:hover { background: rgba(16,185,129,0.12); }
         .row-act.cancel { color: var(--text-muted); font-size: 0.9rem; }
-        .edit-val { width: 100%; padding: 8px 11px; border: 2px solid var(--accent); border-radius: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.86rem; margin: 0; background: #fff; }
-        .edit-val:focus { box-shadow: 0 0 0 3px var(--accent-glow); }
+        .edit-val { width: 100%; padding: 9px 12px; border: 2px solid var(--accent); border-radius: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.86rem; margin: 0; background: #fff; }
+        .edit-val:focus { outline: none; box-shadow: 0 0 0 3px var(--accent-glow); }
 
         .add-field-box { background: #f8fafc; border-radius: var(--radius-md); padding: 15px; border: 1px dashed #cbd5e1; transition: all 0.25s; }
         .add-field-box:focus-within { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-glow); }
@@ -110,6 +136,7 @@
 
         .no-data { text-align: center; color: var(--text-muted); padding: 30px 20px; font-size: 0.86rem; }
         .no-data::before { content: '📋'; display: block; font-size: 2rem; margin-bottom: 10px; opacity: 0.5; }
+        .loading-line { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; }
 
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; animation: fadeIn 0.2s ease; }
         .modal-box { background: #fff; border-radius: var(--radius-xl); padding: 32px 28px; width: 88%; max-width: 380px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.25); animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
@@ -127,12 +154,18 @@
         .m-btn.confirm { background: var(--primary); color: #fff; }
         .m-btn.cancel { background: var(--border-light); color: var(--text-secondary); }
 
+        .modal-box.form-modal { text-align: left; max-width: 420px; }
+        .form-modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+        .form-modal-head h3 { margin-bottom: 0; }
+        .form-close { background: var(--border-light); border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 0.95rem; color: var(--text-secondary); transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .form-close:hover { background: rgba(239,68,68,0.12); color: var(--danger); transform: scale(1.05); }
+
         .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; opacity: 0; transition: all 0.3s ease; z-index: 1100; pointer-events: none; box-shadow: 0 8px 24px rgba(15,36,64,0.35); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        @media (max-width: 380px) { .header h1 { font-size: 1.25rem; } .install-btn, .lock-btn { padding: 9px 12px; font-size: 0.72rem; } }
+        @media (max-width: 380px) { .header h1 { font-size: 1.25rem; } .hbtn { width: 38px; height: 38px; } .hbtn svg { width: 18px; height: 18px; } }
     </style>
 </head>
 <body>
@@ -140,12 +173,16 @@
 <div class="header">
     <div class="header-inner">
         <div>
-            <h1>Shared Info</h1>
-            <div class="sub">Common parameters per stand & operation</div>
+            <h1>ROOLS & RINGS Info</h1>
+            <div class="sub">By Noro km</div>
         </div>
         <div class="header-actions">
-            <button class="install-btn" id="installBtn" onclick="onInstallClick()">⬇️ Install</button>
-            <button class="lock-btn" id="lockBtn" onclick="onLockClick()">🔒 Locked</button>        </div>
+            <button class="hbtn install" id="installBtn" data-tip="Install app" onclick="onInstallClick()"></button>
+            <button class="hbtn add" id="addBtn" data-tip="Add stands" onclick="openAddModal()" style="display:none;">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
+            <button class="hbtn lock" id="lockBtn" data-tip="Unlock editing" onclick="onLockClick()"></button>
+        </div>
     </div>
 </div>
 
@@ -176,9 +213,13 @@
     <div class="card" id="standCard" style="display:none;">
         <div class="card-title"><div class="title-icon">🔩</div><span>Stand & Operation</span></div>
         <div id="typeBadge" class="type-badge rolls">🔩 ROLLS</div>
+
         <label>Select Stand</label>
-        <select id="standSelect" style="margin-bottom:10px;"><option value="">-- Select Stand --</option></select>
-        <span class="cap-chip" id="capChip"></span>
+        <div class="stand-select-row">
+            <select id="standSelect"><option value="">-- Select Stand --</option></select>
+            <button class="del-stand-btn" id="deleteStandBtn" onclick="deleteCurrentStand()" style="display:none;" title="Delete this stand">🗑️</button>
+        </div>
+
         <div id="opSection" style="display:none;">
             <label>Operation</label>
             <div class="op-btns" id="opBtns"></div>
@@ -191,10 +232,11 @@
             <span class="shared-count" id="countInfo"></span>
             <span class="mode-chip view" id="modeChip">🔒 View only</span>
         </div>
-        <table class="fields-table" id="fieldsTable"></table>
+        <table class="fields-table" id="fieldsTable"><tbody></tbody></table>
         <div id="emptyMsg" class="no-data" style="display:none;">No parameters yet.</div>
         <div id="addFieldWrap" style="display:none;">
-            <div class="add-field-box">                <h4>➕ Add Parameter</h4>
+            <div class="add-field-box">
+                <h4>➕ Add Parameter</h4>
                 <div class="add-field-row">
                     <input type="text" id="newKey" placeholder="Name (e.g. Template)">
                     <input type="text" id="newValue" placeholder="Value (e.g. 17)">
@@ -216,6 +258,43 @@
         <div class="m-actions">
             <button class="m-btn confirm" onclick="tryUnlock()">Unlock</button>
             <button class="m-btn cancel" onclick="closePassModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Stands Modal -->
+<div class="modal-overlay" id="addModal">
+    <div class="modal-box form-modal">
+        <div class="form-modal-head">
+            <h3>➕ Add Stands</h3>
+            <button class="form-close" onclick="closeAddModal()">✕</button>
+        </div>
+        <div class="tab-bar">
+            <button class="active-tab" id="tabSingle" onclick="switchAddTab('single')">Single</button>
+            <button id="tabRange" onclick="switchAddTab('range')">Range</button>
+        </div>
+
+        <div id="addSingleContent" class="tab-content active">
+            <label>Stand Name</label>
+            <input type="text" id="newStandName" placeholder="e.g. 1  →  ST1">
+            <label class="notch-toggle-row">
+                <input type="checkbox" id="newStandNotching">
+                <span>⚡ Supports Notching</span>
+            </label>
+            <button class="btn btn-success" onclick="addStand()" style="width:100%;">➕ Add Stand</button>
+        </div>
+
+        <div id="addRangeContent" class="tab-content">
+            <label>Range (Start → End)</label>
+            <div class="range-row" style="margin-bottom:15px;">
+                <input type="number" id="rangeStart" placeholder="Start (e.g. 1)" min="1">
+                <input type="number" id="rangeEnd" placeholder="End (e.g. 16)" min="1">
+            </div>
+            <label class="notch-toggle-row">
+                <input type="checkbox" id="rangeNotching">
+                <span>⚡ Supports Notching (applies to all)</span>
+            </label>
+            <button class="btn btn-success" onclick="addRange()" style="width:100%;">➕ Add Range</button>
         </div>
     </div>
 </div>
@@ -243,20 +322,30 @@
         storageBucket: "norocnc.firebasestorage.app",
         messagingSenderId: "495921952357",
         appId: "1:495921952357:web:53756c0e6735134ff7b88c"
-    };    firebase.initializeApp(firebaseConfig);
+    };
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
     const SECRET_CODE = '1990';
+    const APP_ROOT = 'sharedInfoApp';
+
     const sizes = {
         RM1: ["RB12","RB14","RB16","RB20","RB25","RB32","RB40"],
-        RM2: ["RD5.5","RD6","RD6.5","RD7","RD8","RD9","RD10"],
+        RM2: ["RD5,5","RD6","RD6,5","RD7","RD8","RD9","RD10"],
         RM3: ["RB8","RB10","RB12","RB14","RB16"]
     };
     const millTypeSupport = { RM1: ["ROLLS"], RM2: ["ROLLS","RINGS"], RM3: ["ROLLS","RINGS"] };
+
+    // ROLLS: Turning + Notching (if supported)
+    // RINGS: Grinding (always) + Notching (if supported) — NO Turning
     const typeOperations = {
         ROLLS: [{id:'turning', label:'Turning', icon:'🔧'}, {id:'notching', label:'Notching', icon:'⚡'}],
         RINGS: [{id:'grinding', label:'Grinding', icon:'💎'}, {id:'notching', label:'Notching', icon:'⚡'}]
     };
+
+    const ICON_INSTALL = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>';
+    const ICON_LOCK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1m-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3z"/></svg>';
+    const ICON_UNLOCK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h9V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3H7a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1z"/></svg>';
 
     const millSel = document.getElementById("millSelect");
     const sizeSel = document.getElementById("sizeSelect");
@@ -264,7 +353,6 @@
     const standCard = document.getElementById("standCard");
     const typeBadge = document.getElementById("typeBadge");
     const standSelect = document.getElementById("standSelect");
-    const capChip = document.getElementById("capChip");
     const opSection = document.getElementById("opSection");
     const opBtns = document.getElementById("opBtns");
     const fieldsCard = document.getElementById("fieldsCard");
@@ -273,33 +361,35 @@
     const countInfo = document.getElementById("countInfo");
     const modeChip = document.getElementById("modeChip");
     const addFieldWrap = document.getElementById("addFieldWrap");
+    const addBtn = document.getElementById("addBtn");
+    const deleteStandBtn = document.getElementById("deleteStandBtn");
 
     let currentType = '';
-    let notchingMap = {};
-    let selectedStand = null;
+    let standsData = {};
+    let selectedStandId = null;
     let selectedOp = null;
     let currentFields = {};
     let editingKey = null;
     let isUnlocked = sessionStorage.getItem('sharedUnlocked') === '1';
     let deferredPrompt = null;
 
-    function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'''}[c])); }
+    function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function extractNum(str) { const m = (str||'').match(/\d+/); return m ? parseInt(m[0],10) : 0; }
-    function getSharedRef() { return db.ref(`stands/${millSel.value}/${sizeSel.value}/sharedInfo`); }
+    function formatStandName(input) { const t = input.trim(); return /^\d+$/.test(t) ? `ST${t}` : t; }
     function toast(msg) {
         const t = document.getElementById("toast");
         t.textContent = msg; t.classList.add('show');
         clearTimeout(t._tm); t._tm = setTimeout(() => t.classList.remove('show'), 2200);
     }
 
-    // ============================================================    // PWA — Icon generation + Manifest + Install
-    // ============================================================
+    function getBase() { return `${APP_ROOT}/${millSel.value}/${sizeSel.value}/${currentType}`; }
+    function getParamsPath() { return `${getBase()}/stands/${selectedStandId}/params/${selectedOp}`; }
+
     function drawIcon(size) {
         const c = document.createElement('canvas');
         c.width = size; c.height = size;
         const ctx = c.getContext('2d');
         const s = size;
-        // rounded background
         const r = s * 0.22;
         const grad = ctx.createLinearGradient(0, 0, s, s);
         grad.addColorStop(0, '#0f2440');
@@ -313,97 +403,59 @@
         ctx.closePath();
         ctx.fillStyle = grad;
         ctx.fill();
-
-        const cx = s/2, cy = s/2;
-        const R = s*0.27;
-        const teeth = 8;
+        const cx = s/2, cy = s/2, R = s*0.27;
         ctx.fillStyle = '#ffffff';
-        // teeth
-        for (let i=0;i<teeth;i++){
-            const a = (i/teeth)*Math.PI*2;
+        for (let i=0;i<8;i++){
+            const a = (i/8)*Math.PI*2;
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(a);
             ctx.fillRect(-s*0.05, -R - s*0.08, s*0.10, s*0.10);
             ctx.restore();
         }
-        // gear body
-        ctx.beginPath();
-        ctx.arc(cx, cy, R, 0, Math.PI*2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-        // inner ring
-        ctx.beginPath();
-        ctx.arc(cx, cy, R*0.45, 0, Math.PI*2);
-        ctx.fillStyle = '#2b5586';
-        ctx.fill();
-        // center accent
-        ctx.beginPath();
-        ctx.arc(cx, cy, R*0.18, 0, Math.PI*2);
-        ctx.fillStyle = '#fbbf24';
-        ctx.fill();        return c.toDataURL('image/png');
+        ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fillStyle = '#ffffff'; ctx.fill();
+        ctx.beginPath(); ctx.arc(cx, cy, R*0.45, 0, Math.PI*2); ctx.fillStyle = '#2b5586'; ctx.fill();
+        ctx.beginPath(); ctx.arc(cx, cy, R*0.18, 0, Math.PI*2); ctx.fillStyle = '#fbbf24'; ctx.fill();
+        return c.toDataURL('image/png');
     }
-
     function isStandalone() {
         return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     }
-
     function setupPWA() {
-        const icon192 = drawIcon(192);
-        const icon512 = drawIcon(512);
-
-        // favicon + apple touch icon
-        let favicon = document.querySelector('link[rel="icon"]');
-        if (!favicon) { favicon = document.createElement('link'); favicon.rel = 'icon'; document.head.appendChild(favicon); }
-        favicon.href = icon192;
-        let apple = document.querySelector('link[rel="apple-touch-icon"]');
-        if (!apple) { apple = document.createElement('link'); apple.rel = 'apple-touch-icon'; document.head.appendChild(apple); }
-        apple.href = icon192;
-
-        // manifest (inline via Blob)
-        const appURL = location.origin + location.pathname;
-        const manifest = {
-            name: 'Shared Info',
-            short_name: 'Shared Info',
-            description: 'Rolling mill shared parameters manager',
-            start_url: appURL,
-            scope: appURL,
-            display: 'standalone',
-            orientation: 'portrait',
-            background_color: '#f0f4f8',
-            theme_color: '#1e3a5f',
-            icons: [
-                { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any' },
-                { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any' },
-                { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'maskable' }
-            ]
-        };
-        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-        let mlink = document.querySelector('link[rel="manifest"]');
-        if (!mlink) { mlink = document.createElement('link'); mlink.rel = 'manifest'; document.head.appendChild(mlink); }
-        mlink.href = URL.createObjectURL(blob);
-
-        // install events
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            updateInstallBtn();
-        });
-        window.addEventListener('appinstalled', () => {
-            deferredPrompt = null;            updateInstallBtn();
-            toast('✓ App installed successfully');
-        });
-
+        document.getElementById('installBtn').innerHTML = ICON_INSTALL;
+        try {
+            const icon192 = drawIcon(192);
+            const icon512 = drawIcon(512);
+            let favicon = document.querySelector('link[rel="icon"]');
+            if (!favicon) { favicon = document.createElement('link'); favicon.rel = 'icon'; document.head.appendChild(favicon); }
+            favicon.href = icon192;
+            let apple = document.querySelector('link[rel="apple-touch-icon"]');
+            if (!apple) { apple = document.createElement('link'); apple.rel = 'apple-touch-icon'; document.head.appendChild(apple); }
+            apple.href = icon192;
+            const appURL = location.origin + location.pathname;
+            const manifest = {
+                name: 'Shared Info', short_name: 'Shared Info',
+                description: 'Rolling mill shared parameters manager',
+                start_url: appURL, scope: appURL, display: 'standalone', orientation: 'portrait',
+                background_color: '#f0f4f8', theme_color: '#1e3a5f',
+                icons: [
+                    { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+                    { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any' },
+                    { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+                ]
+            };
+            const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+            let mlink = document.querySelector('link[rel="manifest"]');
+            if (!mlink) { mlink = document.createElement('link'); mlink.rel = 'manifest'; document.head.appendChild(mlink); }
+            mlink.href = URL.createObjectURL(blob);
+        } catch (e) { console.warn('PWA setup warning:', e); }
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
+        window.addEventListener('appinstalled', () => { deferredPrompt = null; updateInstallBtn(); toast('✓ App installed successfully'); });
         updateInstallBtn();
     }
-
     function updateInstallBtn() {
-        const btn = document.getElementById('installBtn');
-        if (isStandalone()) { btn.style.display = 'none'; return; }
-        btn.style.display = 'inline-flex';
-        btn.innerHTML = deferredPrompt ? '⬇️ Install App' : '📲 Install';
+        document.getElementById('installBtn').style.display = isStandalone() ? 'none' : 'flex';
     }
-
     function onInstallClick() {
         if (deferredPrompt) {
             deferredPrompt.prompt();
@@ -418,30 +470,36 @@
             showInstallHelp();
         }
     }
-
     function showInstallHelp() {
         const txt = document.getElementById('installHelpText');
+        const isSecure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
         const ua = navigator.userAgent;
         const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        if (isIOS) {
-            txt.innerHTML = 'On iPhone / iPad: tap the <b>Share</b> button <span style="font-size:1.1em">⬆️</span>, then choose <b>"Add to Home Screen"</b>.';
-        } else {
-            txt.innerHTML = 'Open your browser menu ( <b>⋮</b> ) and choose <b>"Install app"</b> or <b>"Add to Home Screen"</b>.<br><br>Make sure the page is served over <b>HTTPS</b> for the install option to appear.';
-        }
+        let msg = '';
+        if (!isSecure) msg = '⚠️ This page must be served over <b>HTTPS</b> for installation to work.<br><br>Host it on Firebase Hosting / Netlify / GitHub Pages, then reopen and tap Install again.';
+        else if (isIOS) msg = 'On iPhone / iPad: tap the <b>Share</b> button ⬆️, then choose <b>"Add to Home Screen"</b>.';
+        else msg = 'Open your browser menu ( <b>⋮</b> ) and choose <b>"Install app"</b> or <b>"Add to Home Screen"</b>.';
+        txt.innerHTML = msg;
         document.getElementById('installHelpModal').style.display = 'flex';
     }
     function closeInstallHelp() { document.getElementById('installHelpModal').style.display = 'none'; }
     document.getElementById('installHelpModal').addEventListener('click', (e) => { if (e.target === document.getElementById('installHelpModal')) closeInstallHelp(); });
 
-    // ============================================================
-    // Lock / Unlock
-    // ============================================================
     function updateLockUI() {
         const btn = document.getElementById('lockBtn');
-        if (isUnlocked) { btn.innerHTML = '🔓 Unlocked'; btn.classList.add('unlocked'); }
-        else { btn.innerHTML = '🔒 Locked'; btn.classList.remove('unlocked'); }        modeChip.className = 'mode-chip ' + (isUnlocked ? 'edit' : 'view');
+        if (isUnlocked) {
+            btn.innerHTML = ICON_UNLOCK;
+            btn.classList.add('unlocked');
+            btn.dataset.tip = 'Editing ON — tap to lock';
+        } else {
+            btn.innerHTML = ICON_LOCK;
+            btn.classList.remove('unlocked');
+            btn.dataset.tip = 'Unlock editing';
+        }
+        modeChip.className = 'mode-chip ' + (isUnlocked ? 'edit' : 'view');
         modeChip.innerHTML = isUnlocked ? '🔓 Editing enabled' : '🔒 View only';
         addFieldWrap.style.display = isUnlocked ? 'block' : 'none';
+        syncVisibility();
         renderFields(currentFields);
     }
     function onLockClick() {
@@ -449,6 +507,7 @@
             isUnlocked = false;
             sessionStorage.removeItem('sharedUnlocked');
             editingKey = null;
+            closeAddModal();
             updateLockUI();
             toast('Locked — view only');
         } else openPassModal();
@@ -478,104 +537,189 @@
     document.getElementById('passInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
     document.getElementById('passModal').addEventListener('click', (e) => { if (e.target === document.getElementById('passModal')) closePassModal(); });
 
-    // ============================================================
-    // Config + Data
-    // ============================================================
+    function syncVisibility() {
+        const configured = !!(millSel.value && sizeSel.value && currentType);
+        addBtn.style.display = (isUnlocked && configured) ? 'flex' : 'none';
+        deleteStandBtn.style.display = (isUnlocked && selectedStandId) ? 'flex' : 'none';
+    }
+
+    function openAddModal() {
+        if (!isUnlocked) return;
+        if (!millSel.value || !sizeSel.value || !currentType) { toast('Select mill, size and type first'); return; }
+        document.getElementById('newStandName').value = '';
+        document.getElementById('newStandNotching').checked = false;
+        document.getElementById('rangeStart').value = '';
+        document.getElementById('rangeEnd').value = '';
+        document.getElementById('rangeNotching').checked = false;
+        document.getElementById('addModal').style.display = 'flex';
+        setTimeout(() => document.getElementById('newStandName').focus(), 120);
+    }
+    function closeAddModal() { document.getElementById('addModal').style.display = 'none'; }
+    document.getElementById('addModal').addEventListener('click', (e) => { if (e.target === document.getElementById('addModal')) closeAddModal(); });
+
+    function switchAddTab(tab) {
+        document.getElementById('addSingleContent').classList.remove('active');
+        document.getElementById('addRangeContent').classList.remove('active');
+        document.getElementById('tabSingle').classList.remove('active-tab');
+        document.getElementById('tabRange').classList.remove('active-tab');
+        if (tab === 'single') {
+            document.getElementById('addSingleContent').classList.add('active');
+            document.getElementById('tabSingle').classList.add('active-tab');
+        } else {
+            document.getElementById('addRangeContent').classList.add('active');
+            document.getElementById('tabRange').classList.add('active-tab');
+        }
+    }
+
+    // Adding is IDENTICAL for ROLLS and RINGS: name + optional notching flag
+    function addStand() {
+        if (!isUnlocked) return;
+        if (!millSel.value || !sizeSel.value || !currentType) return alert('Select mill, size and type first.');
+        const raw = document.getElementById('newStandName').value.trim();
+        if (!raw) { alert('Enter stand name.'); return; }
+        const name = formatStandName(raw);
+        const supportsNotching = document.getElementById('newStandNotching').checked;
+        db.ref(`${getBase()}/stands`).push({ name, supportsNotching }).then(() => {
+            document.getElementById('newStandName').value = '';
+            toast('✓ Stand added');
+            loadStands();
+            document.getElementById('newStandName').focus();
+        });
+    }
+
+    function addRange() {
+        if (!isUnlocked) return;
+        if (!millSel.value || !sizeSel.value || !currentType) return alert('Select mill, size and type first.');
+        const start = parseInt(document.getElementById('rangeStart').value);
+        const end = parseInt(document.getElementById('rangeEnd').value);
+        if (isNaN(start) || isNaN(end) || start < 1 || start > end) { alert('Enter a valid range (start ≤ end).'); return; }
+        const supportsNotching = document.getElementById('rangeNotching').checked;
+        const base = `${getBase()}/stands`;
+        const promises = [];
+        for (let i = start; i <= end; i++) {
+            promises.push(db.ref(base).push({ name: `ST${i}`, supportsNotching }));
+        }
+        Promise.all(promises).then(() => {
+            document.getElementById('rangeStart').value = '';
+            document.getElementById('rangeEnd').value = '';
+            toast(`✓ Added ${end - start + 1} stands`);
+            loadStands();
+        });
+    }
+
     millSel.addEventListener("change", () => {
         const m = millSel.value;
+        currentType = '';
         sizeSel.innerHTML = '<option value="">—</option>'; sizeSel.disabled = true;
         typeSel.innerHTML = '<option value="">—</option>'; typeSel.disabled = true;
         resetSelection();
         if (m && sizes[m]) {
             sizes[m].forEach(s => sizeSel.innerHTML += `<option value="${s}">${s}</option>`);
-            sizeSel.disabled = false;            const types = millTypeSupport[m] || [];
+            sizeSel.disabled = false;
+            const types = millTypeSupport[m] || [];
             typeSel.innerHTML = '<option value="">—</option>';
             types.forEach(t => typeSel.innerHTML += `<option value="${t}">${t}</option>`);
             typeSel.disabled = false;
             if (types.length === 1) { typeSel.value = types[0]; currentType = types[0]; onTypeReady(); }
         }
+        syncVisibility();
     });
-    sizeSel.addEventListener("change", () => { if (sizeSel.value && typeSel.value) { currentType = typeSel.value; onTypeReady(); } });
-    typeSel.addEventListener("change", () => { currentType = typeSel.value; if (currentType && sizeSel.value) onTypeReady(); else resetSelection(); });
+    sizeSel.addEventListener("change", () => { if (sizeSel.value && typeSel.value) { currentType = typeSel.value; onTypeReady(); } syncVisibility(); });
+    typeSel.addEventListener("change", () => { currentType = typeSel.value; if (currentType && sizeSel.value) onTypeReady(); else resetSelection(); syncVisibility(); });
 
     function resetSelection() {
         standCard.style.display = 'none';
         fieldsCard.style.display = 'none';
-        selectedStand = null; selectedOp = null; editingKey = null; currentFields = {};
+        selectedStandId = null;
+        selectedOp = null;
+        editingKey = null;
+        currentFields = {};
+        standsData = {};
+        opSection.style.display = 'none';
+        standSelect.innerHTML = '<option value="">-- Select Stand --</option>';
     }
+
     function onTypeReady() {
         resetSelection();
         standCard.style.display = 'block';
         typeBadge.className = `type-badge ${currentType.toLowerCase()}`;
         typeBadge.innerHTML = currentType === 'ROLLS' ? '🔩 ROLLS' : '💍 RINGS';
         loadStands();
+        syncVisibility();
     }
 
     function loadStands() {
-        const base = `stands/${millSel.value}/${sizeSel.value}`;
         standSelect.disabled = true;
         standSelect.innerHTML = '<option value="">Loading…</option>';
-        let promise;
-        if (currentType === 'ROLLS') {
-            promise = Promise.all([
-                db.ref(`${base}/ROLLS`).once('value'),
-                db.ref('comStands').once('value')
-            ]).then(([rollsSnap, comSnap]) => {
-                const names = new Set(); notchingMap = {};
-                const rd = rollsSnap.val() || {};
-                Object.values(rd).forEach(st => { if (st.standNumber) { names.add(st.standNumber); if (st.supportsNotching === true) notchingMap[st.standNumber] = true; } });
-                const combo = `${millSel.value}_${sizeSel.value}`;
-                const cd = comSnap.val() || {};
-                Object.values(cd).forEach(st => {
-                    if (st.combos && st.combos[combo] && st.standNumber) { names.add(st.standNumber); if (st.supportsNotching === true) notchingMap[st.standNumber] = true; }
-                });
-                return [...names];
+        db.ref(`${getBase()}/stands`).once('value').then(snap => {
+            standsData = snap.val() || {};
+            const entries = Object.entries(standsData);
+            if (entries.length === 0) {
+                standSelect.innerHTML = '<option value="">No stands yet — tap + to add</option>';
+                standSelect.disabled = true;
+                return;
+            }
+            entries.sort((a,b) => {
+                const na = extractNum(a[1].name), nb = extractNum(b[1].name);
+                if (na !== nb) return na - nb;
+                return (a[1].name||'').localeCompare(b[1].name||'');
             });
-        } else {
-            promise = db.ref(`${base}/RINGS_families`).once('value').then(snap => {
-                const fams = snap.val() || {};
-                const fids = Object.keys(fams);
-                if (!fids.length) return [];
-                return Promise.all(fids.map(fid => db.ref(`${base}/RINGS_families/${fid}/stands`).once('value'))).then(snaps => {
-                    const names = new Set(); notchingMap = {};                    snaps.forEach(sn => {
-                        const d = sn.val() || {};
-                        Object.values(d).forEach(st => { if (st.standNumber) { names.add(st.standNumber); if (st.supportsNotching === true) notchingMap[st.standNumber] = true; } });
-                    });
-                    return [...names];
-                });
-            });
-        }
-        promise.then(names => {
-            names.sort((a,b) => extractNum(a) - extractNum(b));
             standSelect.innerHTML = '<option value="">-- Select Stand --</option>';
-            if (names.length === 0) { standSelect.innerHTML = '<option value="">No stands found</option>'; return; }
             standSelect.disabled = false;
-            names.forEach(n => standSelect.innerHTML += `<option value="${esc(n)}">${esc(n)}</option>`);
+            entries.forEach(([id, st]) => {
+                standSelect.innerHTML += `<option value="${esc(id)}">${esc(st.name)}</option>`;
+            });
+        }).catch(() => {
+            standSelect.innerHTML = '<option value="">Error loading</option>';
+        });
+    }
+
+    function deleteCurrentStand() {
+        if (!isUnlocked || !selectedStandId) return;
+        const name = (standsData[selectedStandId] && standsData[selectedStandId].name) || 'this stand';
+        if (!confirm(`Delete "${name}" and all its parameters?`)) return;
+        db.ref(`${getBase()}/stands/${selectedStandId}`).remove().then(() => {
+            toast('🗑️ Stand deleted');
+            selectedStandId = null;
+            selectedOp = null;
+            editingKey = null;
+            currentFields = {};
+            fieldsCard.style.display = 'none';
+            opSection.style.display = 'none';
+            standSelect.value = '';
+            syncVisibility();
+            loadStands();
         });
     }
 
     standSelect.addEventListener("change", function() {
-        selectedStand = this.value;
-        selectedOp = null; editingKey = null;
+        selectedStandId = this.value || null;
+        selectedOp = null;
+        editingKey = null;
+        currentFields = {};
         fieldsCard.style.display = 'none';
         opSection.style.display = 'none';
-        capChip.classList.remove('show');
-        if (!selectedStand) return;
-        const supportsNotching = notchingMap[selectedStand] === true;
-        capChip.className = 'cap-chip show ' + (supportsNotching ? 'yes' : 'no');
-        capChip.innerHTML = supportsNotching ? '⚡ Notching capable' : '🔧 Standard stand — no Notching';
+        syncVisibility();
+        if (!selectedStandId) return;
+
+        const st = standsData[selectedStandId];
+        const supportsNotching = st && st.supportsNotching === true;
+
+        // ROLLS → turning + notching(if supported) | RINGS → grinding + notching(if supported), NO turning
         let ops = typeOperations[currentType] || [];
         if (!supportsNotching) ops = ops.filter(op => op.id !== 'notching');
+
         opBtns.innerHTML = '';
         ops.forEach((op, i) => {
             const b = document.createElement('button');
-            b.className = 'op-btn';
+            b.className = `op-btn op-${op.id}`;
             b.style.animationDelay = (i * 70) + 'ms';
-            b.innerHTML = `<span class="op-icon">${op.icon}</span><span class="op-name">${op.label}</span>`;
+            b.innerHTML = `<span class="op-icon">${op.icon}</span><span>${op.label}</span>`;
             b.addEventListener('click', () => {
                 opBtns.querySelectorAll('.op-btn').forEach(x => x.classList.remove('active'));
                 b.classList.add('active');
-                selectedOp = op.id; editingKey = null;
+                selectedOp = op.id;
+                editingKey = null;
                 fieldsCard.style.display = 'block';
                 loadFields();
             });
@@ -585,21 +729,29 @@
     });
 
     function loadFields() {
-        if (!selectedStand || !selectedOp) return;
-        getSharedRef().child(`${selectedStand}/${selectedOp}`).once('value').then(snap => {            currentFields = snap.val() || {};
+        if (!selectedStandId || !selectedOp) return;
+        fieldsTable.innerHTML = '';
+        emptyMsg.style.display = 'none';
+        countInfo.innerHTML = '<span class="loading-line">loading…</span>';
+        db.ref(getParamsPath()).once('value').then(snap => {
+            currentFields = snap.val() || {};
             renderFields(currentFields);
+        }).catch(() => {
+            countInfo.innerHTML = '<span class="loading-line">error loading</span>';
         });
     }
 
     function renderFields(fields) {
         const entries = Object.entries(fields);
-        countInfo.innerHTML = `<span class="count-num">${entries.length}</span> parameter${entries.length === 1 ? '' : 's'} · ${esc(selectedStand || '')} · ${esc(selectedOp || '')}`;
+        const standName = (selectedStandId && standsData[selectedStandId]) ? standsData[selectedStandId].name : '';
+        countInfo.innerHTML = `<span class="count-num">${entries.length}</span> parameter${entries.length === 1 ? '' : 's'} · ${esc(standName)} · ${esc(selectedOp || '')}`;
         addFieldWrap.style.display = isUnlocked ? 'block' : 'none';
         fieldsTable.innerHTML = '';
         if (entries.length === 0) { emptyMsg.style.display = 'block'; return; }
         emptyMsg.style.display = 'none';
-        entries.forEach(([k, v]) => {
+        entries.forEach(([k, v], i) => {
             const tr = document.createElement('tr');
+            tr.style.animationDelay = (i * 40) + 'ms';
             if (isUnlocked && editingKey === k) {
                 tr.innerHTML = `
                     <td class="f-key">${esc(k)}</td>
@@ -635,7 +787,8 @@
         else if (delBtn) { deleteField(delBtn.dataset.key); }
         else if (saveBtn) { saveEdit(saveBtn.dataset.key); }
         else if (cancelBtn) { editingKey = null; renderFields(currentFields); }
-    });    fieldsTable.addEventListener('keydown', (e) => {
+    });
+    fieldsTable.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && e.target.classList.contains('edit-val')) {
             const saveBtn = e.target.closest('tr').querySelector('.row-act.save');
             if (saveBtn) saveEdit(saveBtn.dataset.key);
@@ -646,7 +799,7 @@
         const inp = fieldsTable.querySelector('.edit-val');
         const newValue = inp.value.trim();
         if (!newValue) { alert('Value cannot be empty.'); return; }
-        getSharedRef().child(`${selectedStand}/${selectedOp}/${key}`).set(newValue).then(() => {
+        db.ref(getParamsPath()).child(key).set(newValue).then(() => {
             editingKey = null;
             toast('✓ Updated');
             loadFields();
@@ -654,19 +807,19 @@
     }
     function deleteField(key) {
         if (!confirm(`Delete "${key}"?`)) return;
-        getSharedRef().child(`${selectedStand}/${selectedOp}/${key}`).remove().then(() => {
+        db.ref(getParamsPath()).child(key).remove().then(() => {
             toast('🗑️ Deleted');
             loadFields();
         });
     }
     function addField() {
         if (!isUnlocked) return;
-        if (!selectedStand || !selectedOp) return alert('Select a stand and operation first.');
+        if (!selectedStandId || !selectedOp) return alert('Select a stand and operation first.');
         const k = document.getElementById('newKey').value.trim();
         const v = document.getElementById('newValue').value.trim();
         if (!k) return alert('Enter parameter name.');
         if (!v) return alert('Enter parameter value.');
-        getSharedRef().child(`${selectedStand}/${selectedOp}/${k}`).set(v).then(() => {
+        db.ref(getParamsPath()).child(k).set(v).then(() => {
             document.getElementById('newKey').value = '';
             document.getElementById('newValue').value = '';
             toast('✓ Added');
@@ -674,7 +827,8 @@
         });
     }
 
-    window.onload = () => { setupPWA(); updateLockUI(); };
+    setupPWA();
+    updateLockUI();
 </script>
 </body>
 </html>
